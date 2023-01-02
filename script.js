@@ -54,10 +54,17 @@ async function printLists(data) {
         <p>${data[i].oldest_published_date}</p>
         <p>${data[i].newest_published_date}</p>
         <p>${data[i].updated}</p>
-        <a></a>
-    </div>`
+        <a href="" onclick="setList(event)">Read more!</a>
+    </div>`// enlace
         
     }
+}
+
+async function setList(event) {
+    console.log(event);
+    let selected = event.target.value;
+    console.log(selected);
+    list = selected;
 }
 
 async function printListType(data) {
