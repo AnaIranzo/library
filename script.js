@@ -9,16 +9,30 @@ Al cargar la web deben de aparecer todas las listas con los siguientes datos:
 
 //https://api.nytimes.com/svc/books/v3/lists/names.json 1-4
 //https://api.nytimes.com/svc/books/v3/lists.json 5? query list (required)
-let list = 'hardcover-fiction'
+
+
+
+async function setList(event) {
+    let list
+    event.preventDefault()
+    console.log(event);
+    let selected =  event.target.value;
+    console.log(selected);
+    list =  selected;
+    const urlType = `https://api.nytimes.com/svc/books/v3/lists/current/${list}.json?api-key=YaX4wGwjQYBAP1KnRbq7VSTeTbypkxM5`
+    fetcListType(urlType) 
+}
+
 
 const urlLists = 'https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=YaX4wGwjQYBAP1KnRbq7VSTeTbypkxM5'
 
-const urlType = `https://api.nytimes.com/svc/books/v3/lists/current/${list}.json?api-key=YaX4wGwjQYBAP1KnRbq7VSTeTbypkxM5`
+
 
 
 
 const fetcLists = async () => {
     try {
+        
         const response = await fetch(urlLists).then(res => res.json()
         )
         console.log(response)
@@ -30,7 +44,7 @@ const fetcLists = async () => {
 }
 fetcLists()
 
-const fetcListType = async () => {
+const fetcListType = async (urlType) => {
     try {
         const response = await fetch(urlType).then(res => res.json()
         )
@@ -43,7 +57,7 @@ const fetcListType = async () => {
     }
 }
 
-fetcListType()
+
 
 
 async function printLists(data) {
@@ -54,18 +68,13 @@ async function printLists(data) {
         <p>${data[i].oldest_published_date}</p>
         <p>${data[i].newest_published_date}</p>
         <p>${data[i].updated}</p>
-        <a href="" onclick="setList(event)">Read more!</a>
+        
+        <input type="submit" value="${data[i].list_name_encoded}" onclick="setList(event)">
     </div>`// enlace
         
     }
 }
 
-async function setList(event) {
-    console.log(event);
-    let selected = event.target.value;
-    console.log(selected);
-    list = selected;
-}
 
 async function printListType(data) {
     for (let i = 0; i < data.length; i++) {
