@@ -38,7 +38,7 @@ async function setList(event) {
     const urlType = `https://api.nytimes.com/svc/books/v3/lists/current/${list}.json?api-key=YaX4wGwjQYBAP1KnRbq7VSTeTbypkxM5`
     fetcListType(urlType)
     document.querySelector('#dashboard').style.display = 'none'
-    document.querySelector('#list').style.display = 'block'
+    document.querySelector('#list').style.display = 'flex'
 
 }
 
@@ -74,7 +74,7 @@ async function printLists(data) {
 
 async function printListType(data) {
     for (let i = 0; i < data.length; i++) {
-        document.querySelector('#list').innerHTML += `<div>
+        document.querySelector('#list').innerHTML += `<div id='book'>
         <img src="${data[i].book_image}" alt="">
         <p>${data[i].weeks_on_list}</p>
         <p>${data[i].description}</p>
@@ -86,6 +86,7 @@ async function printListType(data) {
 }
 
 async function backToIndex() {
-    document.querySelector('#dashboard').style.display = 'block'
+    document.querySelector('#dashboard').style.display = 'flex'
     document.querySelector('#list').style.display = 'none'
+    document.querySelector('#list').innerHTML = ''//borra el boton
 }
