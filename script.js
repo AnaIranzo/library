@@ -39,6 +39,7 @@ async function setList(event) {
     fetcListType(urlType)
     document.querySelector('#dashboard').style.display = 'none'
     document.querySelector('#list').style.display = 'flex'
+    document.querySelector('#btn_back').style.display = 'block'
 
 }
 
@@ -59,14 +60,13 @@ const fetcListType = async (urlType) => {
 async function printLists(data) {
     
     for (let i = 0; i < data.length; i++) {
-        document.querySelector('#dashboard').innerHTML += ` <div>
+        document.querySelector('#dashboard').innerHTML += ` <div class="list_card">
         <h3>${data[i].list_name}</h3>
-        <p>${data[i].oldest_published_date}</p>
-        <p>${data[i].newest_published_date}</p>
-        <p>${data[i].updated}</p>
-        
-        <input type="submit" value="${data[i].list_name_encoded}" onclick="setList(event)">
-    </div>`// enlace
+        <p>OLDEST: ${data[i].oldest_published_date}</p>
+        <p>NEWEST: ${data[i].newest_published_date}</p>
+        <p>UPDATED: ${data[i].updated}</p>
+        <button value="${data[i].list_name_encoded}" onclick="setList(event)">READ MORE!</button>
+    </div>`
         
     }
 }
@@ -74,12 +74,12 @@ async function printLists(data) {
 
 async function printListType(data) {
     for (let i = 0; i < data.length; i++) {
-        document.querySelector('#list').innerHTML += `<div id='book'>
+        document.querySelector('#list').innerHTML += `<div class="list_card books">
         <img src="${data[i].book_image}" alt="">
-        <p>${data[i].weeks_on_list}</p>
-        <p>${data[i].description}</p>
         <h3>#${data[i].rank} ${data[i].title}</h3>
-        <a href=""></a>
+        <p> Weeks on list: ${data[i].weeks_on_list}</p>
+        <p>${data[i].description}</p>
+        <a href="${data[i].amazon_product_url}">BUY AT AMAZON</a>
     </div>`
         
     }
@@ -88,5 +88,7 @@ async function printListType(data) {
 async function backToIndex() {
     document.querySelector('#dashboard').style.display = 'flex'
     document.querySelector('#list').style.display = 'none'
-    document.querySelector('#list').innerHTML = ''//borra el boton
+    document.querySelector('#list').innerHTML = `<div id="list"></div>`
+    document.querySelector('#btn_back').style.display = 'none'
+    
 }
