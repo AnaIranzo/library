@@ -10,6 +10,8 @@ Al cargar la web deben de aparecer todas las listas con los siguientes datos:
 //https://api.nytimes.com/svc/books/v3/lists/names.json 1-4
 //https://api.nytimes.com/svc/books/v3/lists.json 5? query list (required)
 
+
+
 const urlLists = 'https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=YaX4wGwjQYBAP1KnRbq7VSTeTbypkxM5'
 
 
@@ -92,3 +94,101 @@ async function backToIndex() {
     document.querySelector('#btn_back').style.display = 'none'
     
 }
+
+const openS = document.getElementById('openS');
+const openI = document.getElementById('openI');
+
+const signForm = document.getElementById('sign-form');
+const loginForm = document.getElementById('login-form');
+const outForm = document.getElementById('out-form');
+
+const closeS = document.getElementById('closeS');
+const closeI = document.getElementById('closeI');
+
+
+openS.addEventListener('click', (e) => {
+    e.preventDefault();
+    signForm.classList.add('show');  
+});
+
+openI.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginForm.classList.add('show');  
+});
+
+
+
+closeS.addEventListener('click', (e) => {
+    e.preventDefault();
+    signForm.classList.remove('show');
+}); 
+
+closeI.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginForm.classList.remove('show');
+}); 
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAl3mBzF1JrIegDkaZCM4ISAN2OvVCalT8",
+    authDomain: "nyt-library-7b667.firebaseapp.com",
+    projectId: "nyt-library-7b667",
+    storageBucket: "nyt-library-7b667.appspot.com",
+    messagingSenderId: "1061177010377",
+    appId: "1:1061177010377:web:1cfbd338b94b65b19ac518"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+// Initialize Firebase Authentication and get a reference to the service
+const auth = firebase.auth();
+
+//Sign In 
+const signInForm = document.querySelector('#sign-form');
+
+signInForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = document.querySelector("#sign-email").value;
+    const password = document.querySelector("#sign-pass").value;
+
+    auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+            signInForm.reset();
+
+            console.log('sign in');
+        })
+})
+
+//Log In 
+
+const logInForm = document.querySelector("#login-form");
+
+logInForm.addEventListener("submit", (e)=> {
+    e.preventDefault();
+
+    const email = document.querySelector("#login-email").value;
+    const password = document.querySelector("#login-pass").value;
+
+    auth
+        .signInWithEmailAndPassword(email, password)
+        .then(userCredential => {
+            signInForm.reset();
+
+            console.log('log in');
+        })
+})
+
+//Log Out
+const logOut = document.querySelector("#log_out");
+
+logOut.addEventListener("click", e => {
+    e.preventDefault();
+    auth
+        .signOut()
+        .then(() => {
+            console.log('log out');
+        })
+})

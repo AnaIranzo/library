@@ -14,6 +14,32 @@
     <main>
         <header>
             <img src="../assets/NYT-Bestseller-logo-818x200-800x196.png" alt="NYT BestSellers" srcset="">
+            <a href="" class="log_link" id="openS">Sign in</a>
+            <a href="" class="log_link" id="openI">Log in</a>
+            <a href="" class="log_link" id="log_out">Log out</a>
+            
+            <form action="" id="sign-form" class="form">
+                <div>
+                    <input type="email" id="sign-email" placeholder="Email">
+                    <input type="password" id="sign-pass" placeholder="Password">
+                    <input type="submit"  id="sign-submit" value="Submit">
+                    <button id="closeS">Cerrar</button>
+                    
+                </div>
+            </form>
+
+            <form action="" id="login-form" class="form">
+                <div>
+                    <input type="email" id="login-email" placeholder="Email">
+                    <input type="password" id="login-pass" placeholder="Password">
+                    <input type="submit" id="login-submit" value="Submit">
+                    <button id="closeI">Cerrar</button>
+                </div>
+            </form>
+
+
+                
+            
         </header>
         <section id="dashboard">
 
@@ -27,6 +53,9 @@
         </section>
     </main>
     <footer></footer>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="../script.js"></script>
 </body>
 </html>
