@@ -14,9 +14,10 @@
     <main>
         <header>
             <img src="../assets/NYT-Bestseller-logo-818x200-800x196.png" alt="NYT BestSellers" srcset="">
-            <a href="" class="log_link" id="openS">Sign in</a>
-            <a href="" class="log_link" id="openI">Log in</a>
-            <a href="" class="log_link" id="log_out">Log out</a>
+            <button class="log_link" id="openS">Sign in</button>
+            <button class="log_link" id="openI">Log in</button>
+            <button class="log_link" id="log_out">Log out</button>
+            <button class="log_link" id="fav" onclick="showFav()">Favorites</button>
             
             <form action="" id="sign-form" class="form">
                 <div>
@@ -36,8 +37,6 @@
                     <button id="closeI">Cerrar</button>
                 </div>
             </form>
-
-
                 
             
         </header>
@@ -45,11 +44,13 @@
 
         </section>
         <section>
-            <button id="btn_back" onclick="backToIndex()">BACK TO INDEX</button>
+            <button class="btn_back" onclick="backToIndex()">BACK TO INDEX</button>
             <div id="list"></div>
             
-            
-
+        </section>
+        <section id="fav_list">
+            <!-- <button class="btn_back" onclick="backToIndex()">BACK TO INDEX</button>
+            <div id="fav_list"></div> -->
         </section>
     </main>
     <footer></footer>

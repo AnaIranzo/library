@@ -82,6 +82,7 @@ async function printListType(data) {
         <p> Weeks on list: ${data[i].weeks_on_list}</p>
         <p>${data[i].description}</p>
         <a href="${data[i].amazon_product_url}">BUY AT AMAZON</a>
+        <a href=""  id="add_fav" onclick="">Add to favorites</a>
     </div>`
         
     }
@@ -94,6 +95,8 @@ async function backToIndex() {
     document.querySelector('#btn_back').style.display = 'none'
     
 }
+
+//Log links
 
 const openS = document.getElementById('openS');
 const openI = document.getElementById('openI');
@@ -116,8 +119,6 @@ openI.addEventListener('click', (e) => {
     loginForm.classList.add('show');  
 });
 
-
-
 closeS.addEventListener('click', (e) => {
     e.preventDefault();
     signForm.classList.remove('show');
@@ -127,6 +128,8 @@ closeI.addEventListener('click', (e) => {
     e.preventDefault();
     loginForm.classList.remove('show');
 }); 
+
+//FIREBASE
 
 const firebaseConfig = {
     apiKey: "AIzaSyAl3mBzF1JrIegDkaZCM4ISAN2OvVCalT8",
@@ -192,3 +195,37 @@ logOut.addEventListener("click", e => {
             console.log('log out');
         })
 })
+
+auth.onAuthStateChanged(user => {
+    if(user){
+        console.log('auth: sign in');
+    }else{
+        console.log('log out');
+    }
+})
+
+//Add favorites
+/* let fav = {
+        img,//data[i].book_image
+        rank,// data[i].rank,
+        title,// data[i].title,
+        weeks,//data[i].weeks_on_list,
+        descript, // data[i].description,
+        amazon,//data[i].amazon_product_url,
+
+} */
+
+function addFav(e) {
+    
+}
+
+async function showFav() {
+    
+    document.querySelector('#dashboard').style.display = 'none'
+    document.querySelector('#list').style.display = 'none'
+    document.querySelector('#btn_back').style.display = 'none'
+    document.querySelector('#fav_list').style.display = 'flex'
+
+
+
+}

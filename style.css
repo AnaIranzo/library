@@ -2,6 +2,10 @@
     font-family: 'Newsreader', serif;
 }
 
+header{
+    display: flex;
+    justify-content: space-between;
+}
 
 header img{
     height: 80px;
@@ -34,6 +38,15 @@ a{
     text-decoration:none;
 }
 
+.log_link{
+    padding: 0;
+    background: none;
+    border: none;
+    color: black;
+    border-radius: 4px;
+    text-decoration:none;
+    align-self: center;
+}
 
 .list_card{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -41,6 +54,7 @@ a{
     flex-direction: column;
     align-items: center;
     padding: 15px;
+    gap: 5px;
 }
 
 
@@ -86,13 +100,20 @@ a{
     
 }
 
-#btn_back{
+#fav_list{
+    display: none;
+}
+
+.btn_back{
     margin-bottom: 20px;
     background-color: red;
     color: white;
     display: none;
 }
 
+#add_fav{
+    background-color: white;
+}
 @media screen and (min-width: 768px) {
     header img {
         height: 170px;
