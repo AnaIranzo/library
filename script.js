@@ -76,7 +76,7 @@ async function printLists(data) {
 
 async function printListType(data) {
     for (let i = 0; i < data.length; i++) {
-        let valueFav = []
+        let valueFav = []//convertir en un objeto
         valueFav.push(data[i].book_image, data[i].rank,data[i].title, data[i].weeks_on_list, data[i].description, data[i].amazon_product_url)
         document.querySelector('#list').innerHTML += `<div class="list_card books">
         <img src="${data[i].book_image}" alt="">
@@ -84,7 +84,7 @@ async function printListType(data) {
         <p> Weeks on list: ${data[i].weeks_on_list}</p>
         <p>${data[i].description}</p>
         <a href="${data[i].amazon_product_url}">BUY AT AMAZON</a>
-        <button id="add_fav" onclick="addFav(event)" value="${valueFav}">Add to favorites</button>
+        <button id="add_fav" onclick="addFav(${valueFav})">Add to favorites</button>
     </div>`
         
     }
@@ -217,10 +217,10 @@ auth.onAuthStateChanged(user => {
 
 } */
 
-async function addFav(event) {
-    event.preventDefault();
-    console.log(event);
-    console.log(event.target.value);
+async function addFav(valueFav) {
+    
+    console.log(valueFav);
+    //console.log(event.target.value);
     //console.log(JSON.parse(event.target.value))
     
 }
