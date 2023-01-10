@@ -159,9 +159,14 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// Initialize Cloud Firestore and get a reference to the service
+const db = firebase.firestore();
+
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = firebase.auth();
+
+
 
 //Sign In 
 const signInForm = document.querySelector('#sign-form');
@@ -249,7 +254,6 @@ function addFav(event) {
 }
 
 function setFav(obj) {
-
     const book ={
         img: obj.querySelector("img").src,
         rank_title: obj.querySelector("h3").textContent,
@@ -257,6 +261,21 @@ function setFav(obj) {
         desc: obj.querySelector("#desc").textContent,
         amazon: obj.querySelector("a").href,
     }
+    let arrBooks = [];
+    arrBooks.push(book)
+
+    db.collection("users").add({
+        book: arrBooks,
+    })
+    .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+
+
+
     console.log(book);
     
 }
