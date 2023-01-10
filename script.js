@@ -79,18 +79,14 @@ async function printListType(data) {
     for (let i = 0; i < data.length; i++) {
         let valueFav = [data[i].book_image, data[i].rank, data[i].title, data[i].weeks_on_list, data[i].description, data[i].amazon_product_url];
         
-        console.log(valueFav);
-        
-
-        
         //console.log(valueFav);
         document.querySelector('#list').innerHTML += `<div class="list_card books">
         <img src="${data[i].book_image}" alt="">
         <h3>#${data[i].rank} ${data[i].title}</h3>
-        <p> Weeks on list: ${data[i].weeks_on_list}</p>
-        <p>${data[i].description}</p>
+        <p id="weeks"> Weeks on list: ${data[i].weeks_on_list}</p>
+        <p id="desc">${data[i].description}</p>
         <a href="${data[i].amazon_product_url}">BUY AT AMAZON</a>
-        <button id="add_fav" onclick="addFav(event)">Add to favorites</button>
+        <button class="add_fav" onclick="addFav(event)">Add to favorites</button>
         
 
     </div>`
@@ -236,18 +232,32 @@ auth.onAuthStateChanged(user => {
 } */
 
 function addFav(event) {
-    
-    
-    console.log(event.target.parentElement);
-    
-    //https://www.youtube.com/watch?v=JL7Wo-ASah4
-    console.log(event.target.value);
 
+    if (event.target.classList.contains('add_fav')) {
+        setFav(event.target.parentElement);
+        console.log(event.target.parentElement);
+        
+    }
+    event.stopPropagation();
+    //https://www.youtube.com/watch?v=JL7Wo-ASah4
+    //console.log(event.target.value);
+    
     /* let favorite = event.target.value
     favorite = favorite.split(",")
     console.log(favorite); */
-
     
+}
+
+function setFav(obj) {
+
+    const book ={
+        img: obj.querySelector("img").src,
+        rank_title: obj.querySelector("h3").textContent,
+        weeks: obj.querySelector("#weeks").textContent,
+        desc: obj.querySelector("#desc").textContent,
+        amazon: obj.querySelector("a").href,
+    }
+    console.log(book);
     
 }
 
