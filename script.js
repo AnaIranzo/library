@@ -262,17 +262,27 @@ function setFav(obj) {
         amazon: obj.querySelector("a").href,
     }
     let arrBooks = [];
-    arrBooks.push(book)
+    arrBooks.push(book)//conseguir que pushee los libros en un mismo array
 
-    db.collection("users").add({
-        book: arrBooks,
+    auth.onAuthStateChanged(user => {
+        if(user){
+            console.log('auth: sign in');
+            db.collection("users").add({
+                user: user.email,
+                book: arrBooks,
+            })
+            .then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch((error) => {
+                console.error("Error adding document: ", error);
+            });
+        }else{
+            console.log('log out');
+        }
     })
-    .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-    })
-    .catch((error) => {
-        console.error("Error adding document: ", error);
-    });
+
+
 
 
 
