@@ -75,30 +75,38 @@ async function printLists(data) {
 
 
 async function printListType(data) {
+    
     for (let i = 0; i < data.length; i++) {
-        let valueFav = [{
-            cover: data[i].book_image,
-            rank: data[i].rank,
-            title: data[i].title,
-            weeks: data[i].weeks_on_list,
-            desc:  data[i].description,
-            amazon: data[i].amazon_product_url
-
-        }]
+        let valueFav = [data[i].book_image, data[i].rank, data[i].title, data[i].weeks_on_list, data[i].description, data[i].amazon_product_url];
         
         console.log(valueFav);
+        
+
+        
+        //console.log(valueFav);
         document.querySelector('#list').innerHTML += `<div class="list_card books">
         <img src="${data[i].book_image}" alt="">
         <h3>#${data[i].rank} ${data[i].title}</h3>
         <p> Weeks on list: ${data[i].weeks_on_list}</p>
         <p>${data[i].description}</p>
         <a href="${data[i].amazon_product_url}">BUY AT AMAZON</a>
-        <button id="add_fav${[i]}">Add to favorites</button>
+        <button id="add_fav" onclick="addFav(event)">Add to favorites</button>
+        
+
     </div>`
-        document.querySelector(`#add_fav${[i]}`).addEventListener('click', function(){addFav(valueFav)})
+    // <button class="add_fav${i}" onclick="addFav(${valueFav})">Add to favorites</button>
+        //console.log(`#add_fav${i}`);
         
     }
+    
+    
+   //
+    
+    
 }
+/* const btn = document.querySelectorAll('.add_fav');
+    console.log(btn);
+    btn.forEach(button => button.addEventListener('click', addFav(valueFav))); */
 
 async function backToIndex() {
     document.querySelector('#dashboard').style.display = 'flex'
@@ -227,11 +235,19 @@ auth.onAuthStateChanged(user => {
 
 } */
 
-function addFav(valueFav) {
+function addFav(event) {
     
     
-    //console.log(event.target.value);
-    console.log(valueFav)
+    console.log(event.target.parentElement);
+    
+    //https://www.youtube.com/watch?v=JL7Wo-ASah4
+    console.log(event.target.value);
+
+    /* let favorite = event.target.value
+    favorite = favorite.split(",")
+    console.log(favorite); */
+
+    
     
 }
 
