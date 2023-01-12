@@ -86,9 +86,8 @@ async function printListType(data) {
         <p id="weeks"> Weeks on list: ${data[i].weeks_on_list}</p>
         <p id="desc">${data[i].description}</p>
         <a href="${data[i].amazon_product_url}">BUY AT AMAZON</a>
-        <button class="add_fav" onclick="addFav(event)">Add to favorites</button>
+        <button class="add_fav" id="btn_fav" onclick="addFav(event)">Add to favorites</button>
         
-
     </div>`
     // <button class="add_fav${i}" onclick="addFav(${valueFav})">Add to favorites</button>
         //console.log(`#add_fav${i}`);
@@ -238,12 +237,31 @@ auth.onAuthStateChanged(user => {
 
 function addFav(event) {
 
-    if (event.target.classList.contains('add_fav')) {
+    event.preventDefault();
+    auth.onAuthStateChanged(user => {
+        if(user){
+        const btnfav = document.getElementById('btn_fav');
+        btnfav.disabled = false;  
+
+        if (event.target.classList.contains('add_fav')) {
         setFav(event.target.parentElement);
         console.log(event.target.parentElement);
         
-    }
-    event.stopPropagation();
+        }
+        event.stopPropagation();
+
+        }else{
+            
+        
+            alert('Log in to save your favorites')
+            
+            const btnfav = document.getElementById('btn_fav');
+            btnfav.disabled = true; 
+
+        }
+    })
+
+    
     //https://www.youtube.com/watch?v=JL7Wo-ASah4
     //console.log(event.target.value);
     
@@ -255,21 +273,21 @@ function addFav(event) {
 
 function setFav(obj) {
     const book ={
-        img: obj.querySelector("img").src,
-        rank_title: obj.querySelector("h3").textContent,
-        weeks: obj.querySelector("#weeks").textContent,
-        desc: obj.querySelector("#desc").textContent,
-        amazon: obj.querySelector("a").href,
-    }
-    let arrBooks = [];
-    arrBooks.push(book)//conseguir que pushee los libros en un mismo array
-
+            img: obj.querySelector("img").src,
+            rank_title: obj.querySelector("h3").textContent,
+            weeks: obj.querySelector("#weeks").textContent,
+            desc: obj.querySelector("#desc").textContent,
+            amazon: obj.querySelector("a").href,
+        }
+    
     auth.onAuthStateChanged(user => {
         if(user){
+        
+
             console.log('auth: sign in');
             db.collection("users").add({
                 user: user.email,
-                book: arrBooks,
+                book: book,
             })
             .then((docRef) => {
                 console.log("Document written with ID: ", docRef.id);
@@ -278,17 +296,15 @@ function setFav(obj) {
                 console.error("Error adding document: ", error);
             });
         }else{
-            console.log('log out');
+            alert('Log in to save your favorites')
         }
     })
-
-
-
-
-
     console.log(book);
     
 }
+
+
+
 
 async function showFav() {
     
@@ -297,6 +313,23 @@ async function showFav() {
     document.querySelector('#btn_back').style.display = 'none'
     document.querySelector('#fav_list').style.display = 'flex'
 
+    auth.onAuthStateChanged(user => {
+        if(user){
 
+            db.collection("users").where("user", "==", user.email)
+                .get()
+                .then((querySnapshot) => {querySnapshot.forEach((doc) => {
+                    console.log(`${doc.id} => ${doc.data().book.amazon}`);
+                    document.querySelector('#fav_list').innerHTML += `<div class="list_card books">
+                    <img src="${doc.data().book.img}" alt="">
+                    <h3>#${doc.data().book.rank_title}</h3>
+                    <p id="weeks"> Weeks on list: ${doc.data().book.weeks}</p>
+                    <p id="desc">${doc.data().book.desc}</p>
+                    <a href="${doc.data().book.amazon}">BUY AT AMAZON</a>
+                    </div>`
+    });
+});
+        }
+    })
 
 }
