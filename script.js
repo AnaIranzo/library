@@ -86,7 +86,7 @@ async function printListType(data) {
         <p id="weeks"> Weeks on list: ${data[i].weeks_on_list}</p>
         <p id="desc">${data[i].description}</p>
         <a href="${data[i].amazon_product_url}">BUY AT AMAZON</a>
-        <button class="add_fav" id="btn_fav" onclick="addFav(event)">Add to favorites</button>
+        <button class="add_fav" id="btn_fav" onclick="addFav(event)" >Add to favorites</button>
         
     </div>`
     // <button class="add_fav${i}" onclick="addFav(${valueFav})">Add to favorites</button>
@@ -240,23 +240,24 @@ function addFav(event) {
     event.preventDefault();
     auth.onAuthStateChanged(user => {
         if(user){
-        const btnfav = document.getElementById('btn_fav');
-        btnfav.disabled = false;  
+            const btnFav = document.querySelector('#btn_fav');
+            btnFav.removeAttribute("disabled");
+            
 
-        if (event.target.classList.contains('add_fav')) {
-        setFav(event.target.parentElement);
-        console.log(event.target.parentElement);
+            if (event.target.classList.contains('add_fav')) {
+            setFav(event.target.parentElement);
+            console.log(event.target.parentElement);
         
-        }
-        event.stopPropagation();
+            }
+        //event.stopPropagation();
 
         }else{
             
         
             alert('Log in to save your favorites')
             
-            const btnfav = document.getElementById('btn_fav');
-            btnfav.disabled = true; 
+            document.querySelector('#btn_fav').setAttribute("disabled","")//no funciona
+            
 
         }
     })
