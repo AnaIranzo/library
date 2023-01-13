@@ -87,7 +87,7 @@ async function printListType(data) {
         <h3>#${data[i].rank} ${data[i].title}</h3>
         <p id="weeks"> Weeks on list: ${data[i].weeks_on_list}</p>
         <p id="desc">${data[i].description}</p>
-        <a href="${data[i].amazon_product_url}">BUY AT AMAZON</a>
+        <a href="${data[i].amazon_product_url}" class="amazon_link">BUY AT AMAZON</a>
         <button class="add_fav" id="btn_fav${[i]}" onclick=" addFav(event)" disabled>Add to favorites</button>
     </div>`
         
@@ -316,7 +316,7 @@ async function showFav() {
                     <h3>${doc.data().book.rank_title}</h3>
                     <p id="weeks"> Weeks on list: ${doc.data().book.weeks}</p>
                     <p id="desc">${doc.data().book.desc}</p>
-                    <a href="${doc.data().book.amazon}">BUY AT AMAZON</a>
+                    <a class="amazon_link" href="${doc.data().book.amazon}">BUY AT AMAZON</a>
                     </div>`
     });
 });

@@ -11,16 +11,17 @@
     <title>Document</title>
 </head>
 <body>
-    <main>
+    
         <header>
-            <img src="../assets/NYT-Bestseller-logo-818x200-800x196.png" alt="NYT BestSellers" srcset="">
+            <a href="/pages/index.html"><img src="../assets/NYT-Bestseller-logo-818x200-800x196.png" alt="NYT BestSellers" srcset=""></a>
+            
             <button class="log_link" id="openS">Sign in</button>
             <button class="log_link" id="openI">Log in</button>
             <button class="log_link" id="log_out">Log out</button>
             <button class="log_link" id="fav" onclick="showFav()">Favorites</button>
             
             <form action="" id="sign-form" class="form">
-                <div>
+                <div class="log">
                     <input type="email" id="sign-email" placeholder="Email">
                     <input type="password" id="sign-pass" placeholder="Password">
                     <input type="submit"  id="sign-submit" value="Submit">
@@ -30,7 +31,7 @@
             </form>
 
             <form action="" id="login-form" class="form">
-                <div>
+                <div class="log">
                     <input type="email" id="login-email" placeholder="Email">
                     <input type="password" id="login-pass" placeholder="Password">
                     <input type="submit" id="login-submit" value="Submit">
@@ -40,11 +41,12 @@
                 
             
         </header>
+        <main>
         <section id="dashboard">
 
         </section>
         <section>
-            <button id="btn_back" onclick="backToIndex()">BACK TO INDEX</button>
+            <button id="btn_back" onclick="backToIndex()"> <- BACK TO INDEX</button>
             <div id="list"></div>
             
         </section>

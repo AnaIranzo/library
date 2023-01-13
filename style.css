@@ -5,6 +5,8 @@
 header{
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
 }
 
 header img{
@@ -29,7 +31,11 @@ button:hover{
     color: white;
 }
 
-a{
+main{
+    padding-top: 10px;
+}
+
+.amazon_link{
     padding: 4px 25px;
     background: rgb(248, 198, 55);
     border: 1px solid rgb(248, 198, 55);
@@ -46,6 +52,23 @@ a{
     border-radius: 4px;
     text-decoration:none;
     align-self: center;
+}
+
+.log{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: white;
+}
+
+.log button{
+    padding: 10px;
+}
+
+input[type='submit']{
+    background-color: black;
+    color: white;
 }
 
 .list_card{
@@ -102,6 +125,8 @@ a{
 
 #fav_list{
     display: none;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 #btn_back{
@@ -118,6 +143,17 @@ a{
 #add_fav{
     background-color: white;
 }
+
+#fav{
+    background-color: black;
+    color: white;
+}
+#fav:hover{
+    background-color: white;
+    color: black;
+}
+
+
 @media screen and (min-width: 768px) {
     header img {
         height: 170px;
@@ -130,6 +166,13 @@ a{
         flex-wrap: wrap;
         gap: 10px;
         
+    }
+
+    #fav_list{
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
 
     .list_card{
@@ -164,6 +207,15 @@ a{
         justify-content: center;
     }
 
+    header{
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .log_link{
+        width: 120px;
+    }
+
     .list_card{
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         display: flex;
@@ -178,6 +230,11 @@ a{
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 10px;
+    }
+
+    #fav_list{
+        flex-direction: row;
         gap: 10px;
     }
 }
