@@ -42,6 +42,8 @@ async function setList(event) {
     document.querySelector('#dashboard').style.display = 'none'
     document.querySelector('#list').style.display = 'flex'
     document.querySelector('#btn_back').style.display = 'block'
+/*   document.querySelector('#fav_list').style.display = 'none'
+    document.querySelector('#btn_back_fav').style.display = 'none' */
 
 }
 
@@ -86,28 +88,44 @@ async function printListType(data) {
         <p id="weeks"> Weeks on list: ${data[i].weeks_on_list}</p>
         <p id="desc">${data[i].description}</p>
         <a href="${data[i].amazon_product_url}">BUY AT AMAZON</a>
-        <button class="add_fav" id="btn_fav" onclick=" addFav(event)"disabled>Add to favorites</button>
-        
+        <button class="add_fav" id="btn_fav${[i]}" onclick=" addFav(event)" disabled>Add to favorites</button>
     </div>`
-    // <button class="add_fav${i}" onclick="addFav(${valueFav})">Add to favorites</button>
-        //console.log(`#add_fav${i}`);
         
     }
     
+    auth.onAuthStateChanged(user => {
+        if(user){
+            console.log('auth: sign in' ,user.email);
+            const btnFav = document.querySelectorAll('.add_fav');
+            console.log(btnFav);
+            btnFav.forEach(btn => {
+               // btn.removeAttribute("disabled");
+                btn.disabled = false;
+            })
     
-   //
+        }else{
+            
+            console.log('log out');
+            const btnFav = document.querySelectorAll('.add_fav');
+            btnFav.forEach(btn => {
+                //btn.setAttribute("disabled","");
+                btn.disabled = true;
+            })
+            
     
+        }})
     
 }
-/* const btn = document.querySelectorAll('.add_fav');
-    console.log(btn);
-    btn.forEach(button => button.addEventListener('click', addFav(valueFav))); */
+
 
 async function backToIndex() {
-    document.querySelector('#dashboard').style.display = 'flex'
-    document.querySelector('#list').style.display = 'none'
-    document.querySelector('#list').innerHTML = `<div id="list"></div>`
-    document.querySelector('#btn_back').style.display = 'none'
+    document.querySelector('#dashboard').style.display = 'flex';
+    document.querySelector('#list').innerHTML = `<div id="list"></div>`;
+    document.querySelector('#btn_back').style.display = 'none';
+    //document.querySelector('#fav_list').style.display = 'none'
+    //document.querySelector('#btn_back_fav').style.display = 'none'
+    
+    
     
 }
 
@@ -216,43 +234,11 @@ logOut.addEventListener("click", e => {
         })
 })
 
-auth.onAuthStateChanged(user => {
-    if(user){
-        console.log('auth: sign in');
-    }else{
-        console.log('log out');
-    }
-})
+const user = firebase.auth().currentUser;
 
 //Add favorites
-/* let fav = {
-        img,//data[i].book_image
-        rank,// data[i].rank,
-        title,// data[i].title,
-        weeks,//data[i].weeks_on_list,
-        descript, // data[i].description,
-        amazon,//data[i].amazon_product_url,
 
-} */
 
-auth.onAuthStateChanged(user => {
-    if(user){
-        const btnFav = document.querySelectorAll('.add_fav');
-        console.log(btnFav);
-        btnFav.forEach(btn => {
-            btn.removeAttribute("disabled");
-        })
-
-    }else{
-        
-        
-        const btnFav = document.querySelectorAll('.add_fav');
-        btnFav.forEach(btn => {
-            btn.setAttribute("disabled","");
-        })
-        
-
-    }})
 
 function addFav(event) {
     console.log(event);
@@ -262,42 +248,17 @@ function addFav(event) {
     
     auth.onAuthStateChanged(user => {
         if(user){
-            /* const btnFav = document.querySelectorAll('.add_fav');
-            console.log(btnFav);
-            btnFav.forEach(btn => {
-                btn.removeAttribute("disabled");
-            }) */
-            
             
             if (event.target.classList.contains('add_fav')) {
             setFav(event.target.parentElement);
             console.log(event.target.parentElement);
         
             }
-        //event.stopPropagation();
-
-        }else{
-            
         
-            //alert('Log in to save your favorites')
-            /* const btnFav = document.querySelectorAll('.add_fav');
-            btnFav.forEach(btn => {
-                btn.setAttribute("disabled","");
-            }) */
-            //document.querySelector('.add_fav').setAttribute("disabled","")//no funciona
-            
 
         }
     })
 
-    
-    //https://www.youtube.com/watch?v=JL7Wo-ASah4
-    //console.log(event.target.value);
-    
-    /* let favorite = event.target.value
-    favorite = favorite.split(",")
-    console.log(favorite); */
-    
 }
 
 function setFav(obj) {
@@ -336,10 +297,12 @@ function setFav(obj) {
 
 async function showFav() {
     
-    document.querySelector('#dashboard').style.display = 'none'
-    document.querySelector('#list').style.display = 'none'
-    document.querySelector('#btn_back').style.display = 'none'
-    document.querySelector('#fav_list').style.display = 'flex'
+    document.querySelector('#dashboard').style.display = 'none';
+    document.querySelector('#list').style.display = 'none';
+    document.querySelector('#btn_back').style.display = 'none';
+    document.querySelector('#fav_list').style.display = 'flex';
+    
+    
 
     auth.onAuthStateChanged(user => {
         if(user){
@@ -350,7 +313,7 @@ async function showFav() {
                     console.log(`${doc.id} => ${doc.data().book.amazon}`);
                     document.querySelector('#fav_list').innerHTML += `<div class="list_card books">
                     <img src="${doc.data().book.img}" alt="">
-                    <h3>#${doc.data().book.rank_title}</h3>
+                    <h3>${doc.data().book.rank_title}</h3>
                     <p id="weeks"> Weeks on list: ${doc.data().book.weeks}</p>
                     <p id="desc">${doc.data().book.desc}</p>
                     <a href="${doc.data().book.amazon}">BUY AT AMAZON</a>

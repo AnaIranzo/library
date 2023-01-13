@@ -104,10 +104,14 @@ a{
     display: none;
 }
 
-.btn_back{
+#btn_back{
     margin-bottom: 20px;
     background-color: red;
     color: white;
+    display: none;
+}
+
+#btn_back_fav{
     display: none;
 }
 
