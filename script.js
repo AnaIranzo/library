@@ -86,7 +86,7 @@ async function printListType(data) {
         <p id="weeks"> Weeks on list: ${data[i].weeks_on_list}</p>
         <p id="desc">${data[i].description}</p>
         <a href="${data[i].amazon_product_url}">BUY AT AMAZON</a>
-        <button class="add_fav" id="btn_fav" onclick="addFav(event)" >Add to favorites</button>
+        <button class="add_fav" id="btn_fav" onclick=" addFav(event)"disabled>Add to favorites</button>
         
     </div>`
     // <button class="add_fav${i}" onclick="addFav(${valueFav})">Add to favorites</button>
@@ -235,15 +235,40 @@ auth.onAuthStateChanged(user => {
 
 } */
 
-function addFav(event) {
+auth.onAuthStateChanged(user => {
+    if(user){
+        const btnFav = document.querySelectorAll('.add_fav');
+        console.log(btnFav);
+        btnFav.forEach(btn => {
+            btn.removeAttribute("disabled");
+        })
 
+    }else{
+        
+        
+        const btnFav = document.querySelectorAll('.add_fav');
+        btnFav.forEach(btn => {
+            btn.setAttribute("disabled","");
+        })
+        
+
+    }})
+
+function addFav(event) {
+    console.log(event);
     event.preventDefault();
+    const btn =  event.target
+    btn.style.visibility = 'hidden';
+    
     auth.onAuthStateChanged(user => {
         if(user){
-            const btnFav = document.querySelector('#btn_fav');
-            btnFav.removeAttribute("disabled");
+            /* const btnFav = document.querySelectorAll('.add_fav');
+            console.log(btnFav);
+            btnFav.forEach(btn => {
+                btn.removeAttribute("disabled");
+            }) */
             
-
+            
             if (event.target.classList.contains('add_fav')) {
             setFav(event.target.parentElement);
             console.log(event.target.parentElement);
@@ -254,9 +279,12 @@ function addFav(event) {
         }else{
             
         
-            alert('Log in to save your favorites')
-            
-            document.querySelector('#btn_fav').setAttribute("disabled","")//no funciona
+            //alert('Log in to save your favorites')
+            /* const btnFav = document.querySelectorAll('.add_fav');
+            btnFav.forEach(btn => {
+                btn.setAttribute("disabled","");
+            }) */
+            //document.querySelector('.add_fav').setAttribute("disabled","")//no funciona
             
 
         }
@@ -284,7 +312,6 @@ function setFav(obj) {
     auth.onAuthStateChanged(user => {
         if(user){
         
-
             console.log('auth: sign in');
             db.collection("users").add({
                 user: user.email,
