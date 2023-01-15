@@ -203,6 +203,10 @@ input[type='submit']{
     align-self: center;
 }
 
+#h3_files, #files{
+    display: none;
+}
+
 @media screen and (min-width: 768px) {
     header img {
         height: 170px;

@@ -43,6 +43,9 @@ async function setList(event) {
     document.querySelector('#dashboard').style.display = 'none'
     document.querySelector('#list').style.display = 'flex'
     document.querySelector('#btn_back').style.display = 'block'
+    document.querySelector('#h3_files').style.display = 'none'
+    document.querySelector('#files').style.display = 'none'
+    
 /*   document.querySelector('#fav_list').style.display = 'none'
     document.querySelector('#btn_back_fav').style.display = 'none' */
 
@@ -310,6 +313,8 @@ async function showFav() {
     document.querySelector('#list').style.display = 'none';
     document.querySelector('#btn_back').style.display = 'none';
     document.querySelector('#fav_list').style.display = 'flex';
+    document.querySelector('#h3_files').style.display = 'flex';
+    document.querySelector('#files').style.display = 'flex';
     
     
 
