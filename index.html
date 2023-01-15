@@ -19,6 +19,7 @@
             <button class="log_link" id="openI">Log in</button>
             <button class="log_link" id="log_out">Log out</button>
             <button class="log_link" id="fav" onclick="showFav()">Favorites</button>
+            <img src="" alt="" id="pic">
             
             <form action="" id="sign-form" class="form">
                 <div class="log">
@@ -54,15 +55,19 @@
             <div id="list"></div>
             
         </section>
-        <section id="fav_list">
-            <!-- <button id="btn_back_fav" onclick="backToIndex()">BACK TO INDEX</button>
-            <div id="fav_list"></div>  -->
+        <section id="fav_list_dash">
+            <input type="file" id="files" name="files[]" multiple="">
+            
+            
+            <div id="fav_list"></div>  
         </section>
     </main>
     <footer></footer>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+
     <script src="../script.js"></script>
 </body>
 </html>

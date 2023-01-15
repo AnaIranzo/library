@@ -181,14 +181,20 @@ input[type='submit']{
 }
 
 #fav{
+    display: none;
     background-color: black;
     color: white;
+    padding-left: 30px;
 }
 #fav:hover{
     background-color: white;
     color: black;
 }
 
+#pic{
+    width: 20%;
+    border-radius:50% ;
+}
 
 @media screen and (min-width: 768px) {
     header img {

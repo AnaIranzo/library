@@ -99,6 +99,7 @@ async function printListType(data) {
     auth.onAuthStateChanged(user => {
         if(user){
             console.log('auth: sign in' ,user.email);
+            document.querySelector('#fav').style.display = 'flex';
             const btnFav = document.querySelectorAll('.add_fav');
             console.log(btnFav);
             btnFav.forEach(btn => {
@@ -109,6 +110,7 @@ async function printListType(data) {
         }else{
             
             console.log('log out');
+            document.querySelector('#fav').style.display = 'none';
             const btnFav = document.querySelectorAll('.add_fav');
             btnFav.forEach(btn => {
                 //btn.setAttribute("disabled","");
@@ -242,8 +244,6 @@ const user = firebase.auth().currentUser;
 
 //Add favorites
 
-
-
 function addFav(event) {
     console.log(event);
     event.preventDefault();
@@ -327,4 +327,41 @@ async function showFav() {
         }
     })
 
+}
+document.querySelector('#files').addEventListener('change',uploadFile)
+//function to save file
+function uploadFile() {
+    // Created a Storage Reference with root dir
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
+    // Get the file from DOM
+    var file = document.getElementById("files").files[0];
+    console.log(file);
+    //dynamically set reference to the file name
+    var thisRef = storageRef.child(file.name);
+    //put request upload file to firebase storage
+    thisRef.put(file)
+    .then(function (snapshot) {
+        alert("File Uploaded")
+        getFileUrl(file.name) ;
+    });
+
+
+}
+
+
+// Return URL of a certain image
+function getFileUrl(filename) {
+    //create a storage reference
+    var storage = firebase.storage().ref();
+    //get file url
+    storage.child(filename)
+        .getDownloadURL()
+        .then(function (url) {
+            console.log(url);
+            document.querySelector('#pic').src = url
+        })
+        .catch(function (error) {
+            console.log("error encountered");
+        });
 }
