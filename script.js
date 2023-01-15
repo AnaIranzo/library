@@ -16,10 +16,11 @@ const urlLists = 'https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=
 
 
 const fetcLists = async () => {
+    
     try {
         
-        const response = await fetch(urlLists).then(res => res.json()
-        )
+        const response = await fetch(urlLists).then(res => res.json())
+        document.querySelector('#container_loader').style.display = 'none'
         console.log(response)
         printLists(response.results)
         
@@ -49,9 +50,11 @@ async function setList(event) {
 
 
 const fetcListType = async (urlType) => {
+    document.querySelector('#container_loader').style.display = 'flex'
     try {
-        const response = await fetch(urlType).then(res => res.json()
-        )
+        const response = await fetch(urlType).then(res => res.json())
+
+        document.querySelector('#container_loader').style.display = 'none'
         console.log(response)
         printListType(response.results.books)
         
@@ -198,7 +201,7 @@ signInForm.addEventListener("submit", (e) => {
         .createUserWithEmailAndPassword(email, password)
         .then(userCredential => {
             signInForm.reset();
-
+            alert('Congratulations! You have successfully signed up ')
             console.log('sign in');
         })
 })
@@ -217,7 +220,7 @@ logInForm.addEventListener("submit", (e)=> {
         .signInWithEmailAndPassword(email, password)
         .then(userCredential => {
             signInForm.reset();
-
+            alert('You are logged in')
             console.log('log in');
         })
 })
@@ -231,6 +234,7 @@ logOut.addEventListener("click", e => {
         .signOut()
         .then(() => {
             console.log('log out');
+            alert('You have successfully logged out')
         })
 })
 
