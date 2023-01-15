@@ -100,6 +100,9 @@ async function printListType(data) {
         if(user){
             console.log('auth: sign in' ,user.email);
             document.querySelector('#fav').style.display = 'flex';
+            document.querySelector('#pic').style.display = 'flex';
+            document.querySelector('#pic').src = user.photoURL;
+
             const btnFav = document.querySelectorAll('.add_fav');
             console.log(btnFav);
             btnFav.forEach(btn => {
@@ -198,6 +201,7 @@ signInForm.addEventListener("submit", (e) => {
 
     const email = document.querySelector("#sign-email").value;
     const password = document.querySelector("#sign-pass").value;
+    
 
     auth
         .createUserWithEmailAndPassword(email, password)
@@ -237,6 +241,7 @@ logOut.addEventListener("click", e => {
         .then(() => {
             console.log('log out');
             alert('You have successfully logged out')
+            document.querySelector('#pic').style.display = 'none'
         })
 })
 
@@ -330,6 +335,8 @@ async function showFav() {
 }
 document.querySelector('#files').addEventListener('change',uploadFile)
 //function to save file
+
+
 function uploadFile() {
     // Created a Storage Reference with root dir
     var storage = firebase.storage();
@@ -344,6 +351,9 @@ function uploadFile() {
     .then(function (snapshot) {
         alert("File Uploaded")
         getFileUrl(file.name) ;
+
+
+        
     });
 
 
@@ -360,6 +370,17 @@ function getFileUrl(filename) {
         .then(function (url) {
             console.log(url);
             document.querySelector('#pic').src = url
+            
+            const user = firebase.auth().currentUser;
+
+            user.updateProfile({
+                photoURL: url
+                }).then(() => {
+                console.log('Update successful');
+  // ...
+            }).catch((error) => {
+                console.log(error);
+});  
         })
         .catch(function (error) {
             console.log("error encountered");

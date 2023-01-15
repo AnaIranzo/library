@@ -190,10 +190,17 @@ input[type='submit']{
     background-color: white;
     color: black;
 }
+#nav{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 #pic{
     width: 20%;
     border-radius:50% ;
+    display: none;
+    align-self: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -232,6 +239,11 @@ input[type='submit']{
         flex-wrap: wrap;
         align-items: center;
         gap: 10px;
+    }
+
+    #nav{
+        display: flex;
+        flex-direction: row;
     }
 }
 @media screen and (min-width: 1366px) {

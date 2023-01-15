@@ -14,13 +14,14 @@
     
         <header>
             <a href="index.html"><img src="../assets/NYT-Bestseller-logo-818x200-800x196.png" alt="NYT BestSellers" srcset=""></a>
-            
-            <button class="log_link" id="openS">Sign in</button>
-            <button class="log_link" id="openI">Log in</button>
-            <button class="log_link" id="log_out">Log out</button>
-            <button class="log_link" id="fav" onclick="showFav()">Favorites</button>
-            <img src="" alt="" id="pic">
-            
+            <div id="nav">
+                <button class="log_link" id="openS">Sign in</button>
+                <button class="log_link" id="openI">Log in</button>
+                <button class="log_link" id="log_out">Log out</button>
+                <button class="log_link" id="fav" onclick="showFav()">Favorites</button>
+                
+                <img src="" alt="" id="pic">
+            </div>
             <form action="" id="sign-form" class="form">
                 <div class="log">
                     <input type="email" id="sign-email" placeholder="Email">
@@ -56,6 +57,7 @@
             
         </section>
         <section id="fav_list_dash">
+            <h3>Change your profile pic</h3>
             <input type="file" id="files" name="files[]" multiple="">
             
             
