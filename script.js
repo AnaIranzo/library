@@ -28,7 +28,7 @@ const fetcLists = async () => {
         console.log("Error",error)
     }
 }
-fetcLists()
+fetcLists();
 
 
 async function setList(event) {
