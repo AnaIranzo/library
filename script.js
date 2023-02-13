@@ -28,6 +28,7 @@ const fetcLists = async () => {
         console.log("Error",error)
     }
 }
+
 fetcLists();
 
 
