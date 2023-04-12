@@ -6,18 +6,8 @@ Utilizando la [API del NYTimes](https://developer.nytimes.com/apis) vamos a crea
 Ofreceremos al cliente un dashboard con la listas disponibles en *[Books API](https://developer.nytimes.com/docs/books-product/1/overview)*.
 
 
-**Requisitos para este proyecto**
-- Manipulación dinámica del **DOM**
-- Manejo de **ES6**
-- **Asincronía**
-- Sin frameworks ni librerias externas en la medida de lo posible
-- Gestión del proyecto en **Github** desde el principio. Uso de ramas.
-- Código limpio, **buenas prácticas**
-- Diseño responsive, mobile first, semántica HTML5
-
-**Opcional**
-- Otras APIs, Local Storage, Firebase, PWA...
-- En general, cualquier extra será bien recibido para que investiguéis por vuestra cuenta, siempre y cuando tenga sentido
+<img src="./assets/Screenshot from 2023-04-12 21-38-48.png" alt="">
+   
 
 **Especificaciones(Fase I):**
 - Incluir una animación mientras esperamos la carga del contenido.
@@ -36,7 +26,8 @@ Ofreceremos al cliente un dashboard con la listas disponibles en *[Books API](ht
     - Descripción
     - Titulo y la posición que ocupa en la lista ( #1 titulo.... #2 titulo....)
     - Link para poder comprar el libro en amazon (debe abrirse en otra pestaña)
-
+ <img src="./assets/Screenshot from 2023-04-12 21-39-06.png" alt="">
+ 
 **Especificaciones (Fase II - Firebase):**
 
 - Autenticación con Firebase auth: Los usuarios que se autentiquen podrán guardar sus favoritos
