@@ -35,9 +35,7 @@ fetcLists();
 async function setList(event) {
     let list
     event.preventDefault();
-    console.log(event);
     let selected =  event.target.value;
-    console.log(selected);
     list =  selected;
     const urlType = `https://api.nytimes.com/svc/books/v3/lists/current/${list}.json?api-key=YaX4wGwjQYBAP1KnRbq7VSTeTbypkxM5`
     fetcListType(urlType)
@@ -59,7 +57,6 @@ const fetcListType = async (urlType) => {
         const response = await fetch(urlType).then(res => res.json())
 
         document.querySelector('#container_loader').style.display = 'none'
-        console.log(response)
         printListType(response.results.books)
         
         
@@ -102,13 +99,12 @@ async function printListType(data) {
     
     auth.onAuthStateChanged(user => {
         if(user){
-            console.log('auth: sign in' ,user.email);
+            //console.log('auth: sign in' ,user.email);
             document.querySelector('#fav').style.display = 'flex';
             document.querySelector('#pic').style.display = 'flex';
             document.querySelector('#pic').src = user.photoURL;
 
             const btnFav = document.querySelectorAll('.add_fav');
-            console.log(btnFav);
             btnFav.forEach(btn => {
                // btn.removeAttribute("disabled");
                 btn.disabled = false;
@@ -116,7 +112,7 @@ async function printListType(data) {
     
         }else{
             
-            console.log('log out');
+            //console.log('log out');
             document.querySelector('#fav').style.display = 'none';
             const btnFav = document.querySelectorAll('.add_fav');
             btnFav.forEach(btn => {
@@ -212,7 +208,7 @@ signInForm.addEventListener("submit", (e) => {
         .then(userCredential => {
             signInForm.reset();
             alert('Congratulations! You have successfully signed up ')
-            console.log('sign in');
+            //console.log('sign in');
         })
 })
 
@@ -231,7 +227,7 @@ logInForm.addEventListener("submit", (e)=> {
         .then(userCredential => {
             signInForm.reset();
             alert('You are logged in')
-            console.log('log in');
+            //console.log('log in');
         })
 })
 
@@ -243,7 +239,7 @@ logOut.addEventListener("click", e => {
     auth
         .signOut()
         .then(() => {
-            console.log('log out');
+            //console.log('log out');
             alert('You have successfully logged out')
             document.querySelector('#pic').style.display = 'none'
         })
@@ -254,7 +250,7 @@ const user = firebase.auth().currentUser;
 //Add favorites
 
 function addFav(event) {
-    console.log(event);
+    //console.log(event);
     event.preventDefault();
     const btn =  event.target
     btn.style.visibility = 'hidden';
@@ -264,7 +260,7 @@ function addFav(event) {
             
             if (event.target.classList.contains('add_fav')) {
             setFav(event.target.parentElement);
-            console.log(event.target.parentElement);
+            //console.log(event.target.parentElement);
         
             }
         
@@ -286,22 +282,22 @@ function setFav(obj) {
     auth.onAuthStateChanged(user => {
         if(user){
         
-            console.log('auth: sign in');
+            //console.log('auth: sign in');
             db.collection("users").add({
                 user: user.email,
                 book: book,
             })
             .then((docRef) => {
-                console.log("Document written with ID: ", docRef.id);
+                //console.log("Document written with ID: ", docRef.id);
             })
             .catch((error) => {
-                console.error("Error adding document: ", error);
+                //console.error("Error adding document: ", error);
             });
         }else{
             alert('Log in to save your favorites')
         }
     })
-    console.log(book);
+    //console.log(book);
     
 }
 
@@ -325,7 +321,7 @@ async function showFav() {
             db.collection("users").where("user", "==", user.email)
                 .get()
                 .then((querySnapshot) => {querySnapshot.forEach((doc) => {
-                    console.log(`${doc.id} => ${doc.data().book.amazon}`);
+                    //console.log(`${doc.id} => ${doc.data().book.amazon}`);
                     document.querySelector('#fav_list').innerHTML += `<div class="list_card books">
                     <img src="${doc.data().book.img}" alt="">
                     <h3>${doc.data().book.rank_title}</h3>
@@ -349,7 +345,7 @@ function uploadFile() {
     var storageRef = storage.ref();
     // Get the file from DOM
     var file = document.getElementById("files").files[0];
-    console.log(file);
+    //console.log(file);
     //dynamically set reference to the file name
     var thisRef = storageRef.child(file.name);
     //put request upload file to firebase storage
@@ -374,7 +370,7 @@ function getFileUrl(filename) {
     storage.child(filename)
         .getDownloadURL()
         .then(function (url) {
-            console.log(url);
+            //console.log(url);
             document.querySelector('#pic').src = url
             
             const user = firebase.auth().currentUser;
@@ -382,7 +378,7 @@ function getFileUrl(filename) {
             user.updateProfile({
                 photoURL: url
                 }).then(() => {
-                console.log('Update successful');
+                //console.log('Update successful');
   // ...
             }).catch((error) => {
                 console.log(error);
